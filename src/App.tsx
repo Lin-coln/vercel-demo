@@ -18,9 +18,35 @@ function App() {
       </div>
       <h1>Vite + React {'->'} Vercel</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <div style={{ display: 'inline-flex', gap: 8 }}>
+          <button onClick={() => setCount((count) => count + 1)}>
+            count is {count}
+          </button>
+
+          <button onClick={async () => {
+            const resp = await fetch('/api/hello')
+            const text = await resp.text()
+            console.log(text)
+          }}>
+            trigger api
+          </button>
+
+          <button onClick={async () => {
+            const resp = await fetch('/proxy/hello')
+            const text = await resp.text()
+            console.log(text)
+          }}>
+            trigger proxy
+          </button>
+
+          <button onClick={async () => {
+            const resp = await fetch('/proxy/api/hello')
+            const text = await resp.text()
+            console.log(text)
+          }}>
+            trigger api proxy
+          </button>
+        </div>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
